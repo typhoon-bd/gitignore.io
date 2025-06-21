@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Закрытый сайт</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="login-form">
+        <h1>🔒 Введите код доступа</h1>
+        <input type="password" id="code-input" placeholder="Введите секретный код">
+        <button onclick="checkCode()">Войти</button>
+        <p id="error-message" class="error hidden">Неверный код! Попробуйте снова.</p>
+    </div>
+
+    <div class="login-container hidden" id="content">
+        <h1>🎉 Добро пожаловать!</h1>
+        <p>Вы успешно ввели правильный код.</p>
+        <p>Этот контент видят только избранные!</p>
+    </div>
+
+    <script>
+        function checkCode() {
+            const correctCode = "3105"; // Пароль изменён на 3105
+            const userInput = document.getElementById("code-input").value;
+            const errorMessage = document.getElementById("error-message");
+            
+            if (userInput === correctCode) {
+                document.getElementById("login-form").classList.add("hidden");
+                document.getElementById("content").classList.remove("hidden");
+                errorMessage.classList.add("hidden");
+            } else {
+                errorMessage.classList.remove("hidden");
+            }
+        }
+        
+        // Проверка по нажатию Enter
+        document.getElementById("code-input").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkCode();
+            }
+        });
+    </script>
+</body>
+</html>
